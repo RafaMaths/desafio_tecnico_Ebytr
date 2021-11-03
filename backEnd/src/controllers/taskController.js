@@ -30,10 +30,17 @@ const updateTask_Control = async (req, res) => {
   return res.status(CODE.OK).json(taskUpdate);
 };
 
+const deleteTask_Control = async (req, res) => {
+  const { id } = req.params;
+
+  const delTask = await deleteTask(id);
+  return res.status(CODE.NO_CONTENT).json(delTask);
+};
 
 module.exports = {
   createTask_Control,
   getAllTask_Control,
   getTaskById_Control,
   updateTask_Control,
+  deleteTask_Control
 };
