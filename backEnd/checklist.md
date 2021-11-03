@@ -21,4 +21,6 @@
 
 ## criação da arquitetura MSC
 
+## criação da conexão do MongoDB
 
+## criação de rotas

@@ -5,10 +5,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const taskRouter = require('../routers/taskRouter')
 
-//variável de ambiente da porta
+// variável de ambiente da porta
 PORT = process.env.PORT || 3000;
 
-//inicialização do express
+// inicialização do express
 const app = express();
 
 const corsSetup = {
@@ -19,7 +19,7 @@ app.use(cors(corsSetup));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded)
 
-//criação da rota padrão
+// criação da rota padrão
 app.use('/task', taskRouter);
 
 module.exports = app
