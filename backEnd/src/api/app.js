@@ -17,7 +17,7 @@ const corsSetup = {
 
 app.use(cors(corsSetup));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded)
+app.use(bodyParser.urlencoded({extended: true}));
 
 // criação da rota padrão
 app.use('/task', taskRouter);

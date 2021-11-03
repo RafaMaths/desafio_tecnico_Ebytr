@@ -3,7 +3,7 @@ const {connection} = require('./connection');
 
 const createTask = async({task, statusTask}) => {
   const taskCollection = await connection();
-  const {insertedId: id} = taskCollection.collection('tasks').insertOne({task, statusTask});
+  const {insertedId: id} = taskCollection.collection('tasks').insertOne({task, statusTask, date: new Date()});
   return {task, statusTask, id}
 };
 
@@ -23,7 +23,7 @@ const updateTask = async ({task, statusTask}, id) => {
   if (!ObjectId.isValid(id)) return null;
 
   const taskCollection = await connection();
-  const dbConnect = taskCollection.collection('tasks').updateOne({_id: ObjectId(id)},
+  await taskCollection.collection('tasks').updateOne({_id: ObjectId(id)},
   {
     $set: {task, statusTask}
   });
@@ -35,9 +35,18 @@ const updateTask = async ({task, statusTask}, id) => {
   };
 };
 
+const deleteTask = async (id) => {
+  if (!ObjectId.isValid(id)) return null;
+
+  const taskCollection = await connection();
+  await taskCollection.deleteOne({_id: ObjectId(id)});
+  return id;
+}
+
 module.exports = {
   createTask,
   getAllTask,
   getTaskById,
-  updateTask
+  updateTask,
+  deleteTask
 }
