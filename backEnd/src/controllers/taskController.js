@@ -1,5 +1,5 @@
 const CODE = require('http-status-codes');
-const {createTask, getAllTask, getTaskById} = require('../models/taskModel');
+const {createTask, getAllTask, getTaskById, updateTask, deleteTask} = require('../models/taskModel');
 
 const createTask_Control = async (req, res) => {
   const {task, statusTask } = req.body;
@@ -19,13 +19,21 @@ const getTaskById_Control = async (req, res) => {
   const taskById = await getTaskById(id);
 
   return res.status(CODE.OK).json(taskById);
-}
+};
+
+const updateTask_Control = async (req, res) => {
+  const {task, statusTask} = req.body;
+  const {id} = req.params;
+
+  const taskUpdate = await updateTask({ task, statusTask }, id);
+
+  return res.status(CODE.OK).json(taskUpdate);
+};
+
 
 module.exports = {
   createTask_Control,
   getAllTask_Control,
-  getTaskById_Control
-}
-
-
-
+  getTaskById_Control,
+  updateTask_Control,
+};
