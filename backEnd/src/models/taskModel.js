@@ -1,9 +1,10 @@
+const { ObjectId } = require('mongodb');
 const {connection} = require('./connection');
 
-const createTask = async({task}) => {
+const createTask = async({task, statusTask}) => {
   const taskCollection = await connection();
-  const {insertedId: id} = taskCollection.collection('tasks').insertOne({task});
-  return {task, id}
+  const {insertedId: id} = taskCollection.collection('tasks').insertOne({task, statusTask});
+  return {task, statusTask, id}
 };
 
 const getAllTask = async () => {
@@ -18,8 +19,25 @@ const getTaskById = async(id) => {
   return dbConnect;
 };
 
+const updateTask = async ({task, statusTask}, id) => {
+  if (!ObjectId.isValid(id)) return null;
+
+  const taskCollection = await connection();
+  const dbConnect = taskCollection.collection('tasks').updateOne({_id: ObjectId(id)},
+  {
+    $set: {task, statusTask}
+  });
+  
+  return {
+    task,
+    statusTask,
+    id
+  };
+};
+
 module.exports = {
   createTask,
   getAllTask,
-  getTaskById
+  getTaskById,
+  updateTask
 }
