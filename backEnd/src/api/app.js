@@ -2,7 +2,8 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+const taskRouter = require('../routers/taskRouter')
 
 //variável de ambiente da porta
 PORT = process.env.PORT || 3000;
@@ -19,10 +20,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded)
 
 //criação da rota padrão
-app.get('/', (req, res) => {
-  res.json({message: "Começando o desafio tecnico"})
-});
+app.use('/task', taskRouter);
 
 module.exports = app
-
-
