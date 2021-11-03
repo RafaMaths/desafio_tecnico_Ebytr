@@ -10,9 +10,9 @@ const {
 const router = express.Router();
 
 router.post('/', createTask_Control);
+router.get('/:id', getTaskById_Control);
 router.get('/', getAllTask_Control);
-router.get('/', getTaskById_Control);
-router.put('/', updateTask_Control)
-router.delete('/', deleteTask_Control);
+router.put('/:id', updateTask_Control)
+router.delete('/:id', deleteTask_Control);
 
 module.exports = router;

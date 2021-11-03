@@ -22,4 +22,4 @@ app.use(bodyParser.urlencoded({extended: true}));
 // criação da rota padrão
 app.use('/task', taskRouter);
 
-module.exports = app
+module.exports = app;

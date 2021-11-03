@@ -35,13 +35,13 @@ const updateTask = async ({task, statusTask}, id) => {
   };
 };
 
-const deleteTask = async (id) => {
+const deleteTask = async ({id}) => {
   if (!ObjectId.isValid(id)) return null;
 
   const taskCollection = await connection();
-  await taskCollection.deleteOne({_id: ObjectId(id)});
-  return id;
-}
+  const delTask = await taskCollection.collection('tasks').deleteOne({_id: ObjectId(id)});
+  return delTask;
+};
 
 module.exports = {
   createTask,
