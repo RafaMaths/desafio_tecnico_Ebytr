@@ -6,13 +6,20 @@ const createTask = async({task}) => {
   return {task, id}
 };
 
-const getAll = async () => {
+const getAllTask = async () => {
   const taskCollection = await connection();
   const dbConnect = taskCollection.collection('tasks').find().toArray();
   return dbConnect ;
 };
 
+const getTaskById = async(id) => {
+  const taskCollection = await connection();
+  const dbConnect = taskCollection.collection('tasks').findOne({ _id: ObjectId(id) });
+  return dbConnect;
+};
+
 module.exports = {
-  getAll,
-  createTask
+  createTask,
+  getAllTask,
+  getTaskById
 }
