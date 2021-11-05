@@ -12,7 +12,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "nodemon index.js",
+    "dev": "npx concurrently \"cd ../backEnd && npm run dev\" \"cd ../frontEnd/todolist && npm start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
